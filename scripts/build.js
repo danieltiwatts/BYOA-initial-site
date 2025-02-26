@@ -14,8 +14,7 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
     const markdown = await fs.readFile(markdownPath, 'utf-8');
     const html = marked.parse(markdown);
     
-    const template = `
-<!DOCTYPE html>
+    const template = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +22,6 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
     <meta name="description" content="${siteConfig.description}">
     <title>${siteConfig.title}</title>
     <link rel="stylesheet" href="/BYOA-initial-site/assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
 <body>
     <header>
@@ -48,11 +46,12 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
 
 // Build function
 async function build() {
-    // Create directories if they don't exist
+    // Clean and create docs directory
+    await fs.emptyDir('docs');
     await fs.ensureDir('docs/pages');
     await fs.ensureDir('docs/blog/posts');
     
-    // Convert pages
+    // Convert markdown pages
     const pages = await fs.readdir('pages');
     for (const page of pages) {
         if (page.endsWith('.md')) {
@@ -60,18 +59,6 @@ async function build() {
             await convertMarkdownToHtml(
                 `pages/${page}`,
                 `docs/pages/${name}.html`
-            );
-        }
-    }
-
-    // Convert blog posts
-    const posts = await fs.readdir('blog/posts');
-    for (const post of posts) {
-        if (post.endsWith('.md')) {
-            const name = path.basename(post, '.md');
-            await convertMarkdownToHtml(
-                `blog/posts/${post}`,
-                `docs/blog/posts/${name}.html`
             );
         }
     }
