@@ -3,25 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your site description">
-    <title>Your Website</title>
-    <link rel="stylesheet" href="/BYOA-initial-site/assets/css/style.css">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="/BYOA-initial-site/">Home</a>
-            <a href="/BYOA-initial-site/blog">Blog</a>
-            <a href="/BYOA-initial-site/pages/about.html">About</a>
-            <a href="/BYOA-initial-site/pages/faq.html">FAQ</a>
+            <div class="logo">My Blog</div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
+
     <main>
-        <h1>Welcome to Your Website</h1>
-        <p>This is your landing page content.</p>
+        <section class="hero">
+            <h1>Welcome to My Blog</h1>
+            <p>Thoughts, stories, and ideas.</p>
+        </section>
+
+        <section id="featured-posts">
+            <h2>Featured Posts</h2>
+            <div class="posts-grid">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About</h2>
+            <p>Welcome to my corner of the internet. Here I share my thoughts on technology, programming, and life.</p>
+        </section>
+
+        <section id="newsletter">
+            <h2>Subscribe to My Newsletter</h2>
+            <!-- ConvertKit form will go here -->
+            <div class="convertkit-form">
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
+
     <footer>
-        <p>© 2024 Your Name</p>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
     </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html> 
