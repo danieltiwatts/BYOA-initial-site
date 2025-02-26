@@ -21,7 +21,7 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${siteConfig.description}">
-    <title>${title} - ${siteConfig.title}</title>
+    <title>${siteConfig.title}</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
@@ -34,11 +34,52 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
             <a href="/pages/faq.html">FAQ</a>
         </nav>
     </header>
-    <main>
+    <main class="content">
         ${html}
     </main>
     <footer>
         <p>© 2024 ${siteConfig.author}</p>
     </footer>
 </body>
-</html>`
+</html>`;
+
+    await fs.writeFile(outputPath, template);
+}
+
+// Build function
+async function build() {
+    // Create directories if they don't exist
+    await fs.ensureDir('docs/pages');
+    await fs.ensureDir('docs/blog/posts');
+    
+    // Convert pages
+    const pages = await fs.readdir('pages');
+    for (const page of pages) {
+        if (page.endsWith('.md')) {
+            const name = path.basename(page, '.md');
+            await convertMarkdownToHtml(
+                `pages/${page}`,
+                `docs/pages/${name}.html`
+            );
+        }
+    }
+
+    // Convert blog posts
+    const posts = await fs.readdir('blog/posts');
+    for (const post of posts) {
+        if (post.endsWith('.md')) {
+            const name = path.basename(post, '.md');
+            await convertMarkdownToHtml(
+                `blog/posts/${post}`,
+                `docs/blog/posts/${name}.html`
+            );
+        }
+    }
+
+    // Copy static files
+    await fs.copy('assets', 'docs/assets');
+    await fs.copy('index.html', 'docs/index.html');
+    await fs.copy('blog/index.html', 'docs/blog/index.html');
+}
+
+build().catch(console.error);
