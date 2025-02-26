@@ -22,16 +22,16 @@ async function convertMarkdownToHtml(markdownPath, outputPath) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${siteConfig.description}">
     <title>${siteConfig.title}</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/BYOA-initial-site/assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 </head>
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
-            <a href="/blog">Blog</a>
-            <a href="/pages/about.html">About</a>
-            <a href="/pages/faq.html">FAQ</a>
+            <a href="/BYOA-initial-site/">Home</a>
+            <a href="/BYOA-initial-site/blog">Blog</a>
+            <a href="/BYOA-initial-site/pages/about.html">About</a>
+            <a href="/BYOA-initial-site/pages/faq.html">FAQ</a>
         </nav>
     </header>
     <main class="content">
